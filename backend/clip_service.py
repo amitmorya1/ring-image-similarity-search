@@ -76,11 +76,21 @@ with open(IMAGE_PATHS_FILE, "r") as f:
 #     for p in stored_paths
 # ]
 
-image_paths = [
-    str(BASE_DIR / "data" / Path(p.replace("\\", "/")).name)
-    for p in stored_paths
-]
+# image_paths = [
+#     str(BASE_DIR / "data" / Path(p.replace("\\", "/")).name)
+#     for p in stored_paths
+# ]
 
+
+with open(IMAGE_PATHS_FILE, "r") as f:
+    stored_paths = json.load(f)
+
+image_paths = []
+
+for p in stored_paths:
+    filename = os.path.basename(str(p).replace("\\", "/"))
+    image_path = BASE_DIR / "data" / filename
+    image_paths.append(str(image_path))
 print("Image paths loaded successfully!")
 
 
