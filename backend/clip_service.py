@@ -65,8 +65,16 @@ print("Total images:", index.ntotal)
 # 5. Load image paths
 # --------------------------------
 
+# with open(IMAGE_PATHS_FILE, "r") as f:
+#     image_paths = json.load(f)
+
 with open(IMAGE_PATHS_FILE, "r") as f:
-    image_paths = json.load(f)
+    stored_paths = json.load(f)
+
+image_paths = [
+    str(BASE_DIR / "data" / Path(p).name)
+    for p in stored_paths
+]
 
 print("Image paths loaded successfully!")
 
