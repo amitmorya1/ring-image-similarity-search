@@ -87,10 +87,28 @@ with open(IMAGE_PATHS_FILE, "r") as f:
 
 image_paths = []
 
+# for p in stored_paths:
+#     filename = os.path.basename(str(p).replace("\\", "/"))
+#     image_path = BASE_DIR / "data" / filename
+#     image_paths.append(str(image_path))
+
+
 for p in stored_paths:
-    filename = os.path.basename(str(p).replace("\\", "/"))
+
+    # Convert Windows path separators to Linux separators
+    clean_path = str(p).replace("\\\\", "/").replace("\\", "/")
+
+    # Extract only the image filename
+    filename = clean_path.rsplit("/", 1)[-1]
+
+    # Construct the correct project image path
     image_path = BASE_DIR / "data" / filename
+
     image_paths.append(str(image_path))
+
+print("First 3 image paths:")
+for path in image_paths[:3]:
+    print(path)
 print("Image paths loaded successfully!")
 
 
