@@ -71,8 +71,13 @@ print("Total images:", index.ntotal)
 with open(IMAGE_PATHS_FILE, "r") as f:
     stored_paths = json.load(f)
 
+# image_paths = [
+#     str(BASE_DIR / "data" / Path(p).name)
+#     for p in stored_paths
+# ]
+
 image_paths = [
-    str(BASE_DIR / "data" / Path(p).name)
+    str(BASE_DIR / "data" / Path(p.replace("\\", "/")).name)
     for p in stored_paths
 ]
 
